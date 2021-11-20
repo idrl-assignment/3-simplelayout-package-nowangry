@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "测试 `pip install . `",
+      "setup": "sudo -H python3 -m pip install --upgrade pip setuptools wheel",
+      "run": "sudo -H pip install .",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "测试 `simplelayout  -h`",
+      "setup": "sudo -H python3 -m pip install --upgrade pip setuptools wheel && sudo -H pip install .",
+      "run": "sudo -H simplelayout -h",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    }
+  ]
+}
