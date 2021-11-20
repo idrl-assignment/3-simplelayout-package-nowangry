@@ -1,0 +1,28 @@
+name: comment
+on: [push]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    container: docker://dvcorg/cml-py3:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: cml_run
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_name: ${{ github.repository }}
+        run: |
+          echo $repo_name
+          python -V
+          user_name=`python username.py`
+          echo "## Results\n" >> report.md
+          echo "github username: $user_name\n" >> report.md
+          pip install simplelayout-$user_name
+          pip show simplelayout-$user_name >> report.md
+          echo "\n" >> report.md
+          echo "PyPI link: [simplelayout-$user_name](https://pypi.org/project/simplelayout-$user_name)\n" >> report.md
+          cat report.md
+          simplelayout --board_grid 100 --unit_grid 10 --unit_n 3 --positions 1 15 33 --outdir dir1/dir2 --file_name example
+          echo "simplelayout --board_grid 100 --unit_grid 10 --unit_n 3 --positions 1 15 33 --outdir dir1/dir2 --file_name example\n" >> report.md
+          echo "dir1/dir2/example.jpg\n" >> report.md
+          cml-publish dir1/dir2/example.jpg --md >> report.md
+          cml-send-comment report.md
