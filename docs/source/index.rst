@@ -10,7 +10,7 @@ Welcome to simplelayout-sphinx's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+simplelayout
 
 Indices and tables
 ==================
